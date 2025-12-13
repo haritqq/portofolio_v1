@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Muhammad Nur Haritsah - Full-Stack Developer, Web Engineer, Problem Solver. Portfolio showcasing web development projects and technical expertise.">
+  <meta name="keywords" content="Full-Stack Developer, Web Developer, React, Node.js, Portfolio">
+  <meta name="author" content="Muhammad Nur Haritsah">
+  <title>Muhammad Nur Haritsah | Full-Stack Developer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dark .nav-link::after {
+            background-color: #60a5fa;
+        }
+        
+        .nav-link::after {
+            background-color: #3b82f6;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full w-full overflow-auto">
+  <div id="root" class="w-full h-full"></div>
+  <script>
+        const defaultConfig = {
+            background_color: "#0f172a",
+            surface_color: "#1e293b",
+            text_color: "#e2e8f0",
+            primary_action_color: "#3b82f6",
+            secondary_action_color: "#64748b",
+            developer_name: "Muhammad Nur Haritsah",
+            tagline: "Full-Stack Developer, Web Engineer, Problem Solver",
+            hero_description: "Building innovative web solutions with modern technologies and creative problem-solving",
+            cta_button: "Hire Me",
+            about_title: "About Me",
+            contact_title: "Get In Touch",
+            contact_email: "haritsah@example.com",
+            font_family: "Inter",
+            font_size: 16
+        };
+        
+        let isDarkMode = true;
+        
+        const skills = [
+            "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Express",
+            "MongoDB", "PostgreSQL", "MySQL", "TailwindCSS", "Git", "Docker",
+            "AWS", "REST API", "GraphQL", "Redux", "Vue.js", "Python"
+        ];
+        
+        const experiences = [
+            {
+                position: "Senior Full-Stack Developer",
+                company: "Tech Innovators Inc.",
+                year: "2022 - Present",
+                description: "Leading development of enterprise web applications using React, Node.js, and AWS. Mentoring junior developers and architecting scalable solutions."
+            },
+            {
+                position: "Full-Stack Developer",
+                company: "Digital Solutions Ltd.",
+                year: "2020 - 2022",
+                description: "Developed and maintained multiple client projects using MERN stack. Implemented CI/CD pipelines and improved application performance by 40%."
+            },
+            {
+                position: "Junior Web Developer",
+                company: "StartUp Hub",
+                year: "2019 - 2020",
+                description: "Built responsive web applications with React and Node.js. Collaborated with design team to implement pixel-perfect UIs."
+            }
+        ];
+        
+        const certificates = [
+            {
+                title: "AWS Certified Solutions Architect",
+                issuer: "Amazon Web Services",
+                year: "2023"
+            },
+            {
+                title: "Professional Scrum Master I",
+                issuer: "Scrum.org",
+                year: "2022"
+            },
+            {
+                title: "MongoDB Certified Developer",
+                issuer: "MongoDB University",
+                year: "2021"
+            },
+            {
+                title: "React Developer Certification",
+                issuer: "Meta",
+                year: "2021"
+            }
+        ];
+        
+        const projects = [
+            {
+                name: "E-Commerce Platform",
+                description: "Full-featured online shopping platform with payment integration, admin dashboard, and real-time inventory management",
+                tech: ["React", "Node.js", "MongoDB", "Stripe"],
+                demo: "https://demo-ecommerce.example.com",
+                github: "https://github.com/haritsah/ecommerce-platform"
+            },
+            {
+                name: "Task Management System",
+                description: "Collaborative project management tool with real-time updates, team collaboration, and analytics dashboard",
+                tech: ["Next.js", "PostgreSQL", "Prisma", "Socket.io"],
+                demo: "https://demo-taskmanager.example.com",
+                github: "https://github.com/haritsah/task-manager"
+            },
+            {
+                name: "Social Media Analytics Dashboard",
+                description: "Analytics platform for tracking social media metrics across multiple platforms with data visualization",
+                tech: ["Vue.js", "Express", "MySQL", "Chart.js"],
+                demo: "https://demo-analytics.example.com",
+                github: "https://github.com/haritsah/social-analytics"
+            },
+            {
+                name: "Real-Time Chat Application",
+                description: "Instant messaging platform with group chats, file sharing, and end-to-end encryption",
+                tech: ["React", "Socket.io", "Redis", "AWS S3"],
+                demo: "https://demo-chat.example.com",
+                github: "https://github.com/haritsah/chat-app"
+            },
+            {
+                name: "AI Content Generator",
+                description: "AI-powered content creation tool using GPT API for generating marketing copy and blog posts",
+                tech: ["Next.js", "OpenAI API", "TailwindCSS", "Vercel"],
+                demo: "https://demo-aicontent.example.com",
+                github: "https://github.com/haritsah/ai-content-gen"
+            },
+            {
+                name: "Fitness Tracking Mobile App",
+                description: "Cross-platform mobile app for tracking workouts, nutrition, and fitness goals with social features",
+                tech: ["React Native", "Firebase", "Redux", "Expo"],
+                demo: "https://demo-fitness.example.com",
+                github: "https://github.com/haritsah/fitness-tracker"
+            }
+        ];
+        
+        const blogPosts = [
+            {
+                title: "Building Scalable Web Applications with Microservices",
+                summary: "Learn how to architect and implement microservices using Node.js, Docker, and Kubernetes for enterprise-level applications.",
+                date: "15 Mei 2024",
+                readTime: "8 min read"
+            },
+            {
+                title: "Mastering React Performance Optimization",
+                summary: "Deep dive into React optimization techniques including memoization, code splitting, and lazy loading to build lightning-fast UIs.",
+                date: "3 April 2024",
+                readTime: "12 min read"
+            },
+            {
+                title: "From Monolith to Microservices: A Migration Guide",
+                summary: "Step-by-step guide on migrating legacy monolithic applications to modern microservices architecture with minimal downtime.",
+                date: "20 Maret 2024",
+                readTime: "15 min read"
+            }
+        ];
+        
+        async function onConfigChange(config) {
+            const root = document.getElementById('root');
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+            
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+            
+            const bgColor = isDarkMode ? (config.background_color || defaultConfig.background_color) : '#ffffff';
+            const surfaceColor = isDarkMode ? (config.surface_color || defaultConfig.surface_color) : '#f8fafc';
+            const textColor = isDarkMode ? (config.text_color || defaultConfig.text_color) : '#1e293b';
+            const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+            
+            root.style.backgroundColor = bgColor;
+            root.style.color = textColor;
+            
+            root.innerHTML = `
+                <!-- Navigation -->
+                <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background-color: ${bgColor}; border-bottom: 1px solid ${surfaceColor};">
+                    <div class="max-w-7xl mx-auto px-6 py-4">
+                        <div class="flex justify-between items-center">
+                            <div style="font-size: ${baseSize * 1.5}px; font-weight: 700; color: ${primaryColor};">
+                                ${config.developer_name || defaultConfig.developer_name}
+                            </div>
+                            <div class="hidden md:flex items-center gap-8">
+                                <a href="#about" class="nav-link" style="font-size: ${baseSize}px; color: ${textColor};">About</a>
+                                <a href="#experience" class="nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Experience</a>
+                                <a href="#projects" class="nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Projects</a>
+                                <a href="#blog" class="nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Blog</a>
+                                <a href="#contact" class="nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Contact</a>
+                                <button id="theme-toggle" class="p-2 rounded-lg transition-all" style="background-color: ${surfaceColor};">
+                                    <svg id="theme-icon" width="20" height="20" fill="none" stroke="${textColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        ${isDarkMode ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' : '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>'}
+                                    </svg>
+                                </button>
+                            </div>
+                            <button id="mobile-menu-btn" class="md:hidden p-2">
+                                <svg width="24" height="24" fill="none" stroke="${textColor}" stroke-width="2">
+                                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
+                    <div class="absolute inset-0" style="background-color: rgba(0,0,0,0.5);" id="mobile-menu-overlay"></div>
+                    <div class="absolute right-0 top-0 h-full w-64 p-6" style="background-color: ${surfaceColor};">
+                        <div class="flex flex-col gap-6 mt-16">
+                            <a href="#about" class="mobile-nav-link" style="font-size: ${baseSize}px; color: ${textColor};">About</a>
+                            <a href="#experience" class="mobile-nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Experience</a>
+                            <a href="#projects" class="mobile-nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Projects</a>
+                            <a href="#blog" class="mobile-nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Blog</a>
+                            <a href="#contact" class="mobile-nav-link" style="font-size: ${baseSize}px; color: ${textColor};">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Section -->
+                <section class="min-h-screen flex items-center justify-center px-6 pt-20" style="background-color: ${bgColor};">
+                    <div class="max-w-4xl mx-auto text-center animate-fade-in-up">
+                        <div class="w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden" style="background: linear-gradient(135deg, ${primaryColor}, ${secondaryColor});">
+                            <svg width="160" height="160" viewBox="0 0 160 160">
+                                <circle cx="80" cy="60" r="30" fill="${bgColor}"/>
+                                <path d="M 40 110 Q 80 90 120 110 L 120 160 L 40 160 Z" fill="${bgColor}"/>
+                            </svg>
+                        </div>
+                        <h1 style="font-size: ${baseSize * 3}px; font-weight: 800; color: ${textColor}; margin-bottom: 16px;">
+                            ${config.developer_name || defaultConfig.developer_name}
+                        </h1>
+                        <p style="font-size: ${baseSize * 1.25}px; color: ${primaryColor}; margin-bottom: 24px; font-weight: 600;">
+                            ${config.tagline || defaultConfig.tagline}
+                        </p>
+                        <p style="font-size: ${baseSize * 1.125}px; color: ${secondaryColor}; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                            ${config.hero_description || defaultConfig.hero_description}
+                        </p>
+                        <div class="flex gap-4 justify-center flex-wrap">
+                            <a href="#contact" class="px-8 py-3 rounded-lg font-semibold transition-all hover:scale-105" style="background-color: ${primaryColor}; color: ${bgColor}; font-size: ${baseSize}px;">
+                                ${config.cta_button || defaultConfig.cta_button}
+                            </a>
+                            <a href="#projects" class="px-8 py-3 rounded-lg font-semibold transition-all hover:scale-105" style="background-color: ${surfaceColor}; color: ${textColor}; font-size: ${baseSize}px; border: 2px solid ${primaryColor};">
+                                View Projects
+                            </a>
+                        </div>
+                        <div class="flex gap-6 justify-center mt-8">
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="transition-transform hover:scale-110">
+                                <svg width="28" height="28" fill="${textColor}" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="transition-transform hover:scale-110">
+                                <svg width="28" height="28" fill="${textColor}" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <a href="mailto:${config.contact_email || defaultConfig.contact_email}" class="transition-transform hover:scale-110">
+                                <svg width="28" height="28" fill="none" stroke="${textColor}" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- About Section -->
+                <section id="about" class="py-20 px-6" style="background-color: ${surfaceColor};">
+                    <div class="max-w-6xl mx-auto">
+                        <h2 style="font-size: ${baseSize * 2.5}px; font-weight: 800; text-align: center; margin-bottom: 48px; color: ${textColor};">
+                            ${config.about_title || defaultConfig.about_title}
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <p style="font-size: ${baseSize * 1.125}px; line-height: 1.8; color: ${secondaryColor}; margin-bottom: 24px;">
+                                    Sebagai Full-Stack Developer dengan pengalaman lebih dari 5 tahun, saya berspesialisasi dalam membangun aplikasi web modern yang scalable dan user-friendly. Passion saya adalah mengubah ide kompleks menjadi solusi digital yang elegant.
+                                </p>
+                                <p style="font-size: ${baseSize * 1.125}px; line-height: 1.8; color: ${secondaryColor};">
+                                    Saya memiliki keahlian kuat dalam JavaScript ecosystem, dengan fokus pada React, Node.js, dan teknologi cloud. Saya juga aktif berkontribusi pada open-source projects dan berbagi pengetahuan melalui technical writing.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 style="font-size: ${baseSize * 1.5}px; font-weight: 700; margin-bottom: 24px; color: ${primaryColor};">
+                                    Technical Skills
+                                </h3>
+                                <div class="flex flex-wrap gap-3">
+                                    ${skills.map(skill => `
+                                        <span class="skill-tag px-4 py-2 rounded-lg" style="background-color: ${bgColor}; color: ${textColor}; font-size: ${baseSize * 0.875}px; font-weight: 500; border: 1px solid ${primaryColor};">
+                                            ${skill}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Experience Section -->
+                <section id="experience" class="py-20 px-6" style="background-color: ${bgColor};">
+                    <div class="max-w-6xl mx-auto">
+                        <h2 style="font-size: ${baseSize * 2.5}px; font-weight: 800; text-align: center; margin-bottom: 48px; color: ${textColor};">
+                            Professional Experience
+                        </h2>
+                        <div class="space-y-8">
+                            ${experiences.map((exp, index) => `
+                                <div class="relative pl-8 pb-8 border-l-2" style="border-color: ${primaryColor}; animation-delay: ${index * 0.1}s;">
+                                    <div class="absolute -left-2 top-0 w-4 h-4 rounded-full" style="background-color: ${primaryColor};"></div>
+                                    <div class="p-6 rounded-lg" style="background-color: ${surfaceColor};">
+                                        <h3 style="font-size: ${baseSize * 1.5}px; font-weight: 700; color: ${primaryColor}; margin-bottom: 8px;">
+                                            ${exp.position}
+                                        </h3>
+                                        <p style="font-size: ${baseSize * 1.125}px; color: ${textColor}; margin-bottom: 8px; font-weight: 600;">
+                                            ${exp.company}
+                                        </p>
+                                        <p style="font-size: ${baseSize * 0.875}px; color: ${secondaryColor}; margin-bottom: 16px;">
+                                            ${exp.year}
+                                        </p>
+                                        <p style="font-size: ${baseSize}px; line-height: 1.6; color: ${secondaryColor};">
+                                            ${exp.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Certificates Section -->
+                <section class="py-20 px-6" style="background-color: ${surfaceColor};">
+                    <div class="max-w-6xl mx-auto">
+                        <h2 style="font-size: ${baseSize * 2.5}px; font-weight: 800; text-align: center; margin-bottom: 48px; color: ${textColor};">
+                            Certifications
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            ${certificates.map((cert, index) => `
+                                <div class="p-6 rounded-lg transition-all hover:scale-105" style="background-color: ${bgColor}; border: 2px solid ${primaryColor}; animation-delay: ${index * 0.1}s;">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style="background-color: ${primaryColor};">
+                                            <svg width="24" height="24" fill="none" stroke="${bgColor}" stroke-width="2" viewBox="0 0 24 24">
+                                                <path d="M12 15l-2 5-2.5-1.5L5 20l2-5"></path>
+                                                <path d="M12 15l2 5 2.5-1.5L19 20l-2-5"></path>
+                                                <circle cx="12" cy="8" r="6"></circle>
+                                            </svg>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 style="font-size: ${baseSize * 1.125}px; font-weight: 700; color: ${textColor}; margin-bottom: 8px;">
+                                                ${cert.title}
+                                            </h3>
+                                            <p style="font-size: ${baseSize * 0.875}px; color: ${secondaryColor};">
+                                                ${cert.issuer} • ${cert.year}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Projects Section -->
+                <section id="projects" class="py-20 px-6" style="background-color: ${bgColor};">
+                    <div class="max-w-6xl mx-auto">
+                        <h2 style="font-size: ${baseSize * 2.5}px; font-weight: 800; text-align: center; margin-bottom: 48px; color: ${textColor};">
+                            Featured Projects
+                        </h2>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            ${projects.map((project, index) => `
+                                <div class="project-card rounded-lg overflow-hidden" style="background-color: ${surfaceColor}; border: 1px solid ${primaryColor}; animation-delay: ${index * 0.1}s;">
+                                    <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, ${primaryColor}, ${secondaryColor});">
+                                        <svg width="80" height="80" fill="${bgColor}" viewBox="0 0 24 24">
+                                            <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zm-7-2h2v-2h-2v2zm0-4h2V7h-2v6z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="p-6">
+                                        <h3 style="font-size: ${baseSize * 1.25}px; font-weight: 700; color: ${textColor}; margin-bottom: 12px;">
+                                            ${project.name}
+                                        </h3>
+                                        <p style="font-size: ${baseSize * 0.875}px; line-height: 1.6; color: ${secondaryColor}; margin-bottom: 16px;">
+                                            ${project.description}
+                                        </p>
+                                        <div class="flex flex-wrap gap-2 mb-4">
+                                            ${project.tech.map(tech => `
+                                                <span class="px-3 py-1 rounded-full text-xs font-medium" style="background-color: ${bgColor}; color: ${primaryColor}; font-size: ${baseSize * 0.75}px;">
+                                                    ${tech}
+                                                </span>
+                                            `).join('')}
+                                        </div>
+                                        <div class="flex gap-4">
+                                            <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg font-semibold transition-all hover:scale-105" style="background-color: ${primaryColor}; color: ${bgColor}; font-size: ${baseSize * 0.875}px;">
+                                                Live Demo
+                                            </a>
+                                            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-10 h-10 rounded-lg transition-all hover:scale-105" style="background-color: ${bgColor}; border: 1px solid ${primaryColor};">
+                                                <svg width="20" height="20" fill="${textColor}" viewBox="0 0 24 24">
+                                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Blog Section -->
+                <section id="blog" class="py-20 px-6" style="background-color: ${surfaceColor};">
+                    <div class="max-w-6xl mx-auto">
+                        <h2 style="font-size: ${baseSize * 2.5}px; font-weight: 800; text-align: center; margin-bottom: 48px; color: ${textColor};">
+                            Latest Blog Posts
+                        </h2>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            ${blogPosts.map((post, index) => `
+                                <article class="rounded-lg overflow-hidden transition-all hover:scale-105" style="background-color: ${bgColor}; border: 2px solid ${primaryColor}; animation-delay: ${index * 0.1}s;">
+                                    <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, ${primaryColor}, ${secondaryColor});">
+                                        <svg width="80" height="80" fill="${bgColor}" viewBox="0 0 24 24">
+                                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-center gap-3 mb-3" style="font-size: ${baseSize * 0.75}px; color: ${secondaryColor};">
+                                            <span>${post.date}</span>
+                                            <span>•</span>
+                                            <span>${post.readTime}</span>
+                                        </div>
+                                        <h3 style="font-size: ${baseSize * 1.25}px; font-weight: 700; color: ${textColor}; margin-bottom: 12px; line-height: 1.4;">
+                                            ${post.title}
+                                        </h3>
+                                        <p style="font-size: ${baseSize * 0.875}px; line-height: 1.6; color: ${secondaryColor}; margin-bottom: 16px;">
+                                            ${post.summary}
+                                        </p>
+                                        <a href="#" class="inline-flex items-center gap-2 font-semibold transition-all hover:gap-3" style="color: ${primaryColor}; font-size: ${baseSize * 0.875}px;">
+                                            Read More
+                                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                <polyline points="12 5 19 12 12 19"></polyline>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </article>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Contact Section -->
+                <section id="contact" class="py-20 px-6" style="background-color: ${bgColor};">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 style="font-size: ${baseSize * 2.5}px; font-weight: 800; text-align: center; margin-bottom: 48px; color: ${textColor};">
+                            ${config.contact_title || defaultConfig.contact_title}
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-12">
+                            <div>
+                                <h3 style="font-size: ${baseSize * 1.5}px; font-weight: 700; margin-bottom: 24px; color: ${primaryColor};">
+                                    Let's Work Together
+                                </h3>
+                                <p style="font-size: ${baseSize * 1.125}px; line-height: 1.8; color: ${secondaryColor}; margin-bottom: 32px;">
+                                    Saya terbuka untuk peluang freelance, kolaborasi proyek, atau posisi full-time. Mari diskusikan bagaimana kita bisa bekerja sama!
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background-color: ${primaryColor};">
+                                            <svg width="24" height="24" fill="none" stroke="${bgColor}" stroke-width="2" viewBox="0 0 24 24">
+                                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                                <polyline points="22,6 12,13 2,6"></polyline>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p style="font-size: ${baseSize * 0.875}px; color: ${secondaryColor};">Email</p>
+                                            <a href="mailto:${config.contact_email || defaultConfig.contact_email}" style="font-size: ${baseSize}px; color: ${textColor}; font-weight: 600;">
+                                                ${config.contact_email || defaultConfig.contact_email}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background-color: ${primaryColor};">
+                                            <svg width="24" height="24" fill="${bgColor}" viewBox="0 0 24 24">
+                                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p style="font-size: ${baseSize * 0.875}px; color: ${secondaryColor};">LinkedIn</p>
+                                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style="font-size: ${baseSize}px; color: ${textColor}; font-weight: 600;">
+                                                linkedin.com/in/haritsah
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background-color: ${primaryColor};">
+                                            <svg width="24" height="24" fill="${bgColor}" viewBox="0 0 24 24">
+                                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p style="font-size: ${baseSize * 0.875}px; color: ${secondaryColor};">GitHub</p>
+                                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" style="font-size: ${baseSize}px; color: ${textColor}; font-weight: 600;">
+                                                github.com/haritsah
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form id="contact-form" class="space-y-6">
+                                <div>
+                                    <label for="name" style="display: block; font-size: ${baseSize * 0.875}px; font-weight: 600; margin-bottom: 8px; color: ${textColor};">
+                                        Name
+                                    </label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg outline-none transition-all focus:ring-2" style="background-color: ${surfaceColor}; color: ${textColor}; border: 1px solid ${secondaryColor}; font-size: ${baseSize}px;">
+                                </div>
+                                <div>
+                                    <label for="email" style="display: block; font-size: ${baseSize * 0.875}px; font-weight: 600; margin-bottom: 8px; color: ${textColor};">
+                                        Email
+                                    </label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg outline-none transition-all focus:ring-2" style="background-color: ${surfaceColor}; color: ${textColor}; border: 1px solid ${secondaryColor}; font-size: ${baseSize}px;">
+                                </div>
+                                <div>
+                                    <label for="message" style="display: block; font-size: ${baseSize * 0.875}px; font-weight: 600; margin-bottom: 8px; color: ${textColor};">
+                                        Message
+                                    </label>
+                                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg outline-none transition-all focus:ring-2 resize-none" style="background-color: ${surfaceColor}; color: ${textColor}; border: 1px solid ${secondaryColor}; font-size: ${baseSize}px;"></textarea>
+                                </div>
+                                <button type="submit" class="w-full py-3 rounded-lg font-semibold transition-all hover:scale-105" style="background-color: ${primaryColor}; color: ${bgColor}; font-size: ${baseSize}px;">
+                                    Send Message
+                                </button>
+                                <div id="form-message" style="display: none; padding: 12px; border-radius: 8px; font-size: ${baseSize * 0.875}px;"></div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Footer -->
+                <footer class="py-8 px-6 text-center" style="background-color: ${surfaceColor}; border-top: 1px solid ${primaryColor};">
+                    <p style="font-size: ${baseSize * 0.875}px; color: ${secondaryColor};">
+                        © 2024 ${config.developer_name || defaultConfig.developer_name}. All rights reserved.
+                    </p>
+                </footer>
+            `;
+            
+            // Event Listeners
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    isDarkMode = !isDarkMode;
+                    onConfigChange(config);
+                });
+            }
+            
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                });
+                
+                if (mobileMenuOverlay) {
+                    mobileMenuOverlay.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                }
+                
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+            
+            // Contact Form
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const originalText = submitButton.textContent;
+                    submitButton.textContent = 'Sending...';
+                    submitButton.disabled = true;
+                    
+                    // Simulate form submission
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    formMessage.style.display = 'block';
+                    formMessage.style.backgroundColor = surfaceColor;
+                    formMessage.style.color = primaryColor;
+                    formMessage.style.border = `1px solid ${primaryColor}`;
+                    formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+                    
+                    contactForm.reset();
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                    }, 5000);
+                });
+            }
+        }
+        
+        // Element SDK Implementation
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || defaultConfig.font_family,
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || defaultConfig.font_size,
+                        set: (value) => {
+                            config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["developer_name", config.developer_name || defaultConfig.developer_name],
+                    ["tagline", config.tagline || defaultConfig.tagline],
+                    ["hero_description", config.hero_description || defaultConfig.hero_description],
+                    ["cta_button", config.cta_button || defaultConfig.cta_button],
+                    ["about_title", config.about_title || defaultConfig.about_title],
+                    ["contact_title", config.contact_title || defaultConfig.contact_title],
+                    ["contact_email", config.contact_email || defaultConfig.contact_email]
+                ])
+            });
+        }
+        
+        // Initial render
+        if (window.elementSdk) {
+            onConfigChange(window.elementSdk.config);
+        } else {
+            onConfigChange(defaultConfig);
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ace127722f45f42',t:'MTc2NTU1MTQyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
